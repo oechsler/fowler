@@ -38,6 +38,20 @@ class Customer {
         return result;
     }
 
+    public String htmlStatement() {
+        Enumeration enum_rentals = rentals.elements();
+        String result = "<H1>Rentals for <EM>" + getName() + "</EM></ H1><P>\n";
+        while (enum_rentals.hasMoreElements()) {
+            Rental each = (Rental) enum_rentals.nextElement();
+            //show figures for each rental
+            result += each.getMovie().getTitle()+ ": " + each.getCharge() + "<BR>\n";
+        }
+        //add footer lines
+        result += "<P>You owe <EM>" + getTotalCharge() + "</EM><P>\n";
+        result += "On this rental you earned <EM>" + getTotalFrequentRenterPoints() + "</EM> frequent renter points<P>";
+        return result;
+    }
+
     private int getTotalFrequentRenterPoints() {
         int totalFrequentRenterPoints = 0;
         for (Object o : rentals) {
