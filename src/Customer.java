@@ -34,13 +34,22 @@ class Customer {
         }
         //add footer lines
         result += "Amount owed is " + getTotalCharge() + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points";
+        result += "You earned " + getTotalFrequentRenterPoints() + " frequent renter points";
         return result;
+    }
+
+    private int getTotalFrequentRenterPoints() {
+        int totalFrequentRenterPoints = 0;
+        for (Object o : rentals) {
+            Rental rental = (Rental) o;
+            totalFrequentRenterPoints += rental.getFrequentRenterPoints();
+        }
+        return totalFrequentRenterPoints;
     }
 
     private double getTotalCharge() {
         double totalCharge = 0;
-        for (Object o: rentals) {
+        for (Object o : rentals) {
             Rental rental = (Rental) o;
             totalCharge += rental.getCharge();
         }
